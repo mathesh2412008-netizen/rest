@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="end">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Valentine's Day, My Love ❤️</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap');
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            height: 100vh; background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+            font-family: 'Dancing Script', cursive; overflow: hidden; position: relative;
+        }
+        .hearts { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; }
+        .heart { position: absolute; font-size: 20px; color: #ff69b4; animation: float 6s infinite linear; }
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+        }
+        .envelope { 
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 300px; height: 200px; cursor: pointer; transition: transform 0.3s;
+        }
+        .envelope:hover { transform: translate(-50%, -50%) scale(1.05); }
+        .front {
+            width: 100%; height: 100%; background: linear-gradient(145deg, #e8c7c7, #d9a0a0);
+            border-radius: 15px; box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            display: flex; align-items: center; justify-content: center; font-size: 18px; color: #8b4513;
+            position: relative; z-index: 2;
+        }
+        .flap {
+            position: absolute; top: -20px; left: 50%; transform: translateX(-50%) rotateX(0deg);
+            width: 0; height: 0; border-left: 150px solid transparent; border-right: 150px solid transparent;
+            border-bottom: 120px solid #d9a0a0; transition: all 1s ease; z-index: 1;
+        }
+        .open .flap { transform: translateX(-50%) rotateX(180deg); }
+        .letter {
+            position: absolute; top: 20px; left: 20px; right: 20px; bottom: 20px;
+            background: #fff; border-radius: 10px; padding: 30px; text-align: center;
+            transform: translateY(220px); opacity: 0; transition: all 1s ease; z-index: 3;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .open .letter { transform: translateY(0); opacity: 1; }
+        h1 { font-size: 28px; color: #e91e63; margin-bottom: 15px; }
+        p { font-size: 18px; line-height: 1.5; color: #333; margin-bottom: 10px; }
+        .music { position: fixed; bottom: 20px; right: 20px; opacity: 0.8; }
+        audio { width: 200px; }
+        button { background: #ff69b4; color: white; border: none; padding: 10px 20px; border-radius: 25px; font-family: inherit; font-size: 16px; cursor: pointer; margin-top: 15px; }
+        button:hover { background: #ff1493; }
+    </style>
+</head>
+<body>
+    <div class="hearts" id="hearts"></div>
+    <div class="envelope" onclick="openEnvelope()">
+        <div class="front">
+            <div>To: My Beautiful Girlfriend ❤️<br>From: Your Loving Boyfriend</div>
+        </div>
+        <div class="flap"></div>
+        <div class="letter">
+            <h1>Happy Valentine's Day, My Love! 💕</h1>
+            <p>You make every day special. Your smile lights up my world.</p>
+            <p>I love you more than words can say. Will you be my Valentine forever?</p>
+            <button onclick="shareLove()">Share Your Feelings ❤️</button>
+        </div>
+    </div>
+    <div class="music">
+        <audio id="bgMusic" loop>
+            <source src="valentine day.mp3" type="audio/wav"> <!-- Replace with romantic free music URL -->
+        </audio>
+        <button onclick="toggleMusic()">🎵 Play Romantic Song</button>
+    </div>
+
+    <script>
+        // Floating hearts
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.innerHTML = '💖';
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+            document.getElementById('hearts').appendChild(heart);
+            setTimeout(() => heart.remove(), 6000);
+        }
+        setInterval(createHeart, 300);
+
+        function openEnvelope() {
+            document.querySelector('.envelope').classList.add('open');
+            document.getElementById('bgMusic').play();
+        }
+
+        function toggleMusic() {
+            const music = document.getElementById('bgMusic');
+            if (music.paused) music.play(); else music.pause();
+        }
+
+        function shareLove() {
+            if (navigator.share) {
+                navigator.share({ title: 'My Valentines Gift', text: 'Check out this special page I made for you! 💕' });
+            } 
+            else {
+                alert('Made with love just for you! Copy this page URL and share. 😘');
+            }
+        }
+    </script>
+</body>
+</html>
